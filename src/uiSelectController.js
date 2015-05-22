@@ -323,7 +323,10 @@ uis.controller('uiSelectCtrl',
 
       if (item && !angular.isUndefined(ctrl.lockChoiceExpression)) {
           isLocked = !!(itemScope.$eval(ctrl.lockChoiceExpression)); // force the boolean value
-          item._uiSelectChoiceLocked = isLocked; // store this for later reference
+          //we need to check if it's an object while doing bind to single property and async loading 
+          if(typeof(item) === 'object') {
+            item._uiSelectChoiceLocked = isLocked; // store this for later reference
+          }
       }
 
       return isLocked;
